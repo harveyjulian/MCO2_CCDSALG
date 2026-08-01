@@ -3,17 +3,30 @@
 
 /* ---------------- Rendering ---------------- */
 
+/**
+ *  Clears the screen.
+ */
 void 
 clearScreen(void)
 {
     printf("\033[2J\033[H");
 }
 
+/**
+ *  Renders the maze.
+ *  @param m The maze that will be utilized
+ *  @param ratPos Shows the position of the Rat
+ *  @param visited Shows the cells already visited by the Rat
+ *  @param finalPath The path taken by the Rat
+ *  @param finalPathLen The length of the path taken by the Rat
+ *  @param showFinalPath The path of the WINNING path
+ *  @pre The maze already exists
+ */
 void 
 renderMaze(Maze *m, Point ratPos, int visited[MAX_DIM][MAX_DIM],
            Point *finalPath, int finalPathLen, int showFinalPath) 
 {
-    int r, c;
+    int r, c; //row and col
     int i;
     int onFinalPath = 0;
     char sym;
