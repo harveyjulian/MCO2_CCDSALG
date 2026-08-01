@@ -5,7 +5,7 @@
 #include "maze.h"
 
 void clearScreen(void);
-void renderMaze(const Maze *m, Point ratPos, const int visited[MAX_DIM][MAX_DIM],
-                 const Point *finalPath, int finalPathLen, int showFinalPath);
+void renderMaze(Maze *m, Point ratPos, int visited[MAX_DIM][MAX_DIM],
+                 Point *finalPath, int finalPathLen, int showFinalPath);
 
 #endif /* RENDER_H */
