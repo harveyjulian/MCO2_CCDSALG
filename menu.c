@@ -50,10 +50,8 @@ int main()
 		}
 		else if(opt == 3)
 		{
+			printf("\n");
 			printf("Leaving simulator. Thank you!");
 		}
-		
-	
-	
 	
 }
