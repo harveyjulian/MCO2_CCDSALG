@@ -5,11 +5,11 @@ include <stdio.h>
 /* ---------------- Maze loading ---------------- */
 
 /**
- *  [insert desc]
- *  @param filename -
- *  @param m -
- *  @return ok -
- *  @pre -
+ *  Loads a new maze.
+ *  @param filename The file where the maze will be loaded
+ *  @param m The maze created
+ *  @return Returns 1 if the maze is created successfully, 0 if otherwise
+ *  @pre The file already exists
  */
 int 
 loadMaze(const char *filename, Maze *m) {
@@ -99,12 +99,12 @@ loadMaze(const char *filename, Maze *m) {
 }
 
 /**
- *  [insert desc]
- *  @param m -
- *  @param r -
- *  @param c -
- *  @return in -
- *  @pre -
+ *  Checks if the cell is in the bounds of the maze or not.
+ *  @param m The maze used in the program
+ *  @param r The row of the cell
+ *  @param c The column of the cell
+ *  @return 1 if it is in bounds of the maze, 0 if otherwise
+ *  @pre The maze already exists
  */
 int 
 isInBounds(Maze *m, int r, int c)
@@ -123,12 +123,12 @@ isInBounds(Maze *m, int r, int c)
 }
 
 /**
- *  [insert desc]
- *  @param m -
- *  @param r -
- *  @param c -
- *  @return walkable -
- *  @pre -
+ *  Checks if the cell is walkable or not.
+ *  @param m The maze used in the program
+ *  @param r The row of the cell
+ *  @param c The column of the cell
+ *  @return 1 if it is walkable, 0 if otherwise
+ *  @pre The maze already exists
  */
 int 
 isWalkable(Maze *m, int r, int c)
