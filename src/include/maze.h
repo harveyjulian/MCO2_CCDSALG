@@ -12,8 +12,8 @@ typedef struct {
     int   loaded;
 } Maze;
 
-int loadMaze(const char *filename, Maze *m);
-int isInBounds(const Maze *m, int r, int c);
-int isWalkable(const Maze *m, int r, int c);
+int loadMaze(char *filename, Maze *m);
+int isInBounds(Maze *m, int r, int c);
+int isWalkable(Maze *m, int r, int c);
 
 #endif /* MAZE_H */
