@@ -15,6 +15,11 @@
  *  @param animate Determines the illustration of the maze as the Rat moves
  *  @param delayMicros Shows the amount of time spent by the Rat moving
  *  @pre The maze already exists
+ *  @note res->elapsedMs only accumulates time spent on the actual BFS
+ *        work (popping cells, bookkeeping, goal check, neighbor
+ *        expansion). Time spent inside the animate block (rendering,
+ *        usleep) is excluded, so elapsedMs stays the same whether or
+ *        not animate is on.
  */
 void 
 runBFS(Maze *m, SearchResult *res, 
@@ -26,6 +31,7 @@ runBFS(Maze *m, SearchResult *res,
     int r, c, i;
     long startTicks;
     long endTicks;
+    long accumulatedTicks;
     
     /* Direction Vectors */
     dr[0] = -1; dc[0] = 0;
@@ -46,6 +52,7 @@ runBFS(Maze *m, SearchResult *res,
     res->cellsExplored  = 0;
     res->found          = 0;
     res->pathLen        = 0;
+    accumulatedTicks    = 0;
 
     queueInit(&q);
 
@@ -55,17 +62,22 @@ runBFS(Maze *m, SearchResult *res,
 
     queuePush(&q, m->start);
 
-    startTicks = (long)clock();
-
     while (!queueIsEmpty(&q) && !res->found)
     {
-        Point cur = queuePop(&q);
+        Point cur;
         int d;
+
+        startTicks = (long)clock();
+
+        cur = queuePop(&q);
 
         res->order[res->orderCount][0] = cur.row;
         res->order[res->orderCount][1] = cur.col;
-        res->orderCount = res->orderCount + 1; //increments
-        res->cellsExplored = res->cellsExplored + 1; //increments
+        res->orderCount = res->orderCount + 1; 
+        res->cellsExplored = res->cellsExplored + 1; 
+
+        endTicks = (long)clock();
+        accumulatedTicks = accumulatedTicks + (endTicks - startTicks);
 
         if (animate)
         {
@@ -86,9 +98,12 @@ runBFS(Maze *m, SearchResult *res,
             usleep(delayMicros);
         }
 
+        /* Resume the clock for the rest of the internal BFS step. */
+        startTicks = (long)clock();
+
         if (cur.row == m->goal.row && cur.col == m->goal.col)
         {
-            res->found = 1; //cheese found
+            res->found = 1;
         } 
         else 
         {
@@ -110,10 +125,12 @@ runBFS(Maze *m, SearchResult *res,
                 }
             }
         }
+
+        endTicks = (long)clock();
+        accumulatedTicks = accumulatedTicks + (endTicks - startTicks);
     }
 
-    endTicks = (long)clock();
-    res->elapsedMs = ((double)(endTicks - startTicks) / CLOCKS_PER_SEC) * 1000.0;
+    res->elapsedMs = ((double)accumulatedTicks / CLOCKS_PER_SEC) * 1000.0;
 
     if (res->found) 
     {
