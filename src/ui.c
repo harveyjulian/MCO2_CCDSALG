@@ -9,6 +9,12 @@
 
 /* ---------------- UI / Menu ---------------- */
 
+void 
+separator1()
+{
+	printf("*************************************** \n");
+}
+
 /**
  *  Displays the main menu of the simulator.
  *  @param mazeLoaded Determines if the maze is already loaded
@@ -23,7 +29,6 @@ printMenu(int mazeLoaded)
     printf("[2] Load File \n");
     printf("[3] Quit \n");
     printf("\n");
-    printf(">>");
 }
 
 /**
@@ -106,13 +111,56 @@ promptForFilename(char *buffer, int size) {
 int 
 runMenuLoop() {
     Maze m;
-    int  running;
-    int  exitStatus;
-    int  choice;
+    int running;
+    int exitStatus;
+    int choice;
+    char name;
+    int size;
 
     m.loaded = 0;
     running = 1;
     exitStatus = 0;
     
     //continue
+
+    if(m.loaded == 1)
+    {
+        separator1();
+        printMenu(m.loaded);
+        separator1();
+
+        printf(">> ");
+    	scanf("%d", &choice);
+
+        while(choice != 1 && choice != 2 && choice != 3)
+	    {
+		    printf("Invalid input! Press Enter to try again... \n");
+    		while(getchar() != '\n');
+            getchar();
+            choice = 0; 
+        
+            separator1();
+            printf(">> ");
+		    scanf("%d", &choice);
+	    }
+
+        if(choice == 1)
+    	{
+            promptForFilename(&name, size);
+			startSimulation(&m);
+            
+	    }
+    	else if(choice == 2)
+		{
+            loadMaze(&name, &m);
+	    }
+    	else if(choice == 3)
+        {
+		    printf("\n");
+		    printf("Leaving the simulator. Thank you!!!");
+	    }
+
+    }
+
+
  }
