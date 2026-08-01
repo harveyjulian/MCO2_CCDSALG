@@ -2,6 +2,11 @@
 
 /* ---------------- Queue helpers (self-implemented, no libs) ---------------- */
 
+/**
+ *  Sets up a new Queue.
+ *  @param q The queue to be utilized
+ *  @pre The queue already exists 
+ */
 void 
 queueInit(Queue *q)
 {
@@ -10,8 +15,14 @@ queueInit(Queue *q)
     q->count = 0;
 }
 
+/**
+ *  Checks if queue is empty.
+ *  @param q The queue to be checked
+ *  @return 1 if empty, 0 if otherwise
+ *  @pre The queue already exists 
+ */
 int 
-queueIsEmptyQueue *q) 
+queueIsEmptyQueue (Queue *q) 
 {
     int empty;
 
@@ -27,6 +38,13 @@ queueIsEmptyQueue *q)
     return empty;
 }
 
+/**
+ *  Adds Point p into the queue. 
+ *  @param q The queue to be utilized
+ *  @param p The Point to be added into the queue
+ *  @return 1 if Point p is added successfully, 0 if otherwise
+ *  @pre The queue already exists 
+ */
 int 
 queuePush(Queue *q, Point p) 
 {
@@ -47,6 +65,12 @@ queuePush(Queue *q, Point p)
     return ok;
 }
 
+/**
+ *  Removes the last Point from the queue
+ *  @param q The queue to be utilized
+ *  @return The removed Point  
+ *  @pre The queue already exists 
+ */
 Point 
 queuePop(Queue *q) 
 {
