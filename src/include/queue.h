@@ -11,7 +11,7 @@ typedef struct {
 } Queue;
 
 void  queueInit(Queue *q);
-int   queueIsEmpty(const Queue *q);
+int   queueIsEmpty(Queue *q);
 int   queuePush(Queue *q, Point p);
 Point queuePop(Queue *q);
 
