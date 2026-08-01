@@ -1,6 +1,6 @@
 include <stdio.h>
 #include <string.h>
-#include "maze.h"
+#include "include/maze.h"
 
 /* ---------------- Maze loading ---------------- */
 
