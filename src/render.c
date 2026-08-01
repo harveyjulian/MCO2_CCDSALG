@@ -7,7 +7,7 @@
  *  Clears the screen.
  */
 void 
-clearScreen(void)
+clearScreen()
 {
     printf("\033[2J\033[H");
 }
