@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "render.h"
+#include "include/render.h"
 
 /* ---------------- Rendering ---------------- */
 
