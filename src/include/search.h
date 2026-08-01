@@ -16,6 +16,6 @@ typedef struct {
     double elapsedMs;
 } SearchResult;
 
-void runBFS(const Maze *m, SearchResult *res, int animate, int delayMicros);
+void runBFS(Maze *m, SearchResult *res, int animate, int delayMicros);
 
 #endif /* SEARCH_H */
