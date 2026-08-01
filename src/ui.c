@@ -9,6 +9,11 @@
 
 /* ---------------- UI / Menu ---------------- */
 
+/**
+ *  Displays the main menu of the simulator.
+ *  @param mazeLoaded Determines if the maze is already loaded
+ *  @pre The maze is loaded already
+ */
 void
 printMenu(int mazeLoaded)
 {
@@ -21,6 +26,11 @@ printMenu(int mazeLoaded)
     printf(">>");
 }
 
+/**
+ *  Displays the result of the simulator.
+ *  @param res The result of the maze simulator
+ *  @pre The result already exists
+ */
 /* For post-simulation display */
 void
 showMetrics(SearchResult *res) {
@@ -36,6 +46,11 @@ showMetrics(SearchResult *res) {
     printf("Execution time       : %.3f ms\n", res->elapsedMs);
 }
 
+/**
+ *  Showcases the simulation.
+ *  @param m The maze being utilized
+ *  @pre The maze already exists
+ */
 void
 startSimulation(Maze *m)
 {
@@ -51,7 +66,7 @@ startSimulation(Maze *m)
         for (i = 0; i < res.pathLen; i = i + 1)
         {
             clearScreen();
-            printf("PATH FOUND!!!! Following it. Look at this:\n\n");
+            printf("PATH FOUND!!! Following it... Look at this:\n\n");
             renderMaze(m, res.path[i], res.visited, res.path, i + 1, 1);
             fflush(stdout);
             usleep(100000);
@@ -60,15 +75,22 @@ startSimulation(Maze *m)
     else
     {
         Point none;
-        printf("BFS finished exploring, but no path exists :((( \n\n");
+        
+        printf("BFS finished exploring, but no path exists... :((( \n\n");
         none.row = -1;
         none.col = -1;
+
         renderMaze(m, none, res.visited, NULL, 0, 0);
     }
 
     showMetrics(&res);
 }
 
+/**
+ *  Finds the filename for the maze.
+ *  @param buffer Where the maze filename will be stored
+ *  @param size -
+ */
 void
 promptForFilename(char *buffer, int size) {
     printf("Enter maze filename: ");
@@ -76,6 +98,11 @@ promptForFilename(char *buffer, int size) {
     getchar();
 }
 
+/**
+ *  [insert desc]
+ *  @param m ---
+ *  @return 1 if , 0 if otherwise
+ */
 int 
 runMenuLoop() {
     Maze m;
