@@ -12,7 +12,7 @@ include <stdio.h>
  *  @pre The file already exists
  */
 int 
-loadMaze(const char *filename, Maze *m) {
+loadMaze(char *filename, Maze *m) {
     FILE *fp;
     int   ok;
     int   r;
