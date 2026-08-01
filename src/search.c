@@ -6,8 +6,16 @@
 #include "queue.h"
 #include "render.h"
 
-/* ---------------- BFS Search ---------------- */
+/* ------------------- BFS -------------------- */
 
+/**
+ *  The code for algorithm Breadth-First Search.
+ *  @param m The maze that will be utilized
+ *  @param res The result of the BFS
+ *  @param animate Determines the illustration of the maze as the Rat moves
+ *  @param delayMicros Shows the amount of time spent by the Rat moving
+ *  @pre The maze already exists
+ */
 void 
 runBFS(Maze *m, SearchResult *res, 
        int animate, int delayMicros)
@@ -40,9 +48,11 @@ runBFS(Maze *m, SearchResult *res,
     res->pathLen        = 0;
 
     queueInit(&q);
+
     res->visited[m->start.row][m->start.col] = 1;
     res->parent[m->start.row][m->start.col].row = -1;
     res->parent[m->start.row][m->start.col].col = -1;
+
     queuePush(&q, m->start);
 
     startTicks = (long)clock();
@@ -50,16 +60,17 @@ runBFS(Maze *m, SearchResult *res,
     while (!queueIsEmpty(&q) && !res->found)
     {
         Point cur = queuePop(&q);
-        int   d;
+        int d;
 
         res->order[res->orderCount][0] = cur.row;
         res->order[res->orderCount][1] = cur.col;
-        res->orderCount = res->orderCount + 1;
-        res->cellsExplored = res->cellsExplored + 1;
+        res->orderCount = res->orderCount + 1; //increments
+        res->cellsExplored = res->cellsExplored + 1; //increments
 
         if (animate)
         {
             Point ratPos;
+
             ratPos.row = cur.row;
             ratPos.col = cur.col;
 
@@ -77,7 +88,7 @@ runBFS(Maze *m, SearchResult *res,
 
         if (cur.row == m->goal.row && cur.col == m->goal.col)
         {
-            res->found = 1;
+            res->found = 1; //cheese found
         } 
         else 
         {
