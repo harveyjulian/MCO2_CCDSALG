@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <time.h>
-#include "search.h"
-#include "queue.h"
-#include "render.h"
+#include "include/search.h"
+#include "include/queue.h"
+#include "include/render.h"
 
 /* ------------------- BFS -------------------- */
 
