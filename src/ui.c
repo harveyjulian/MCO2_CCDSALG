@@ -9,17 +9,12 @@
 
 /* ---------------- UI / Menu ---------------- */
 
-void 
+void
 separator1()
 {
-	printf("*************************************** \n");
+    printf("*************************************** \n");
 }
 
-/**
- *  Displays the main menu of the simulator.
- *  @param mazeLoaded Determines if the maze is already loaded
- *  @pre The maze is loaded already
- */
 void
 printMenu(int mazeLoaded)
 {
@@ -31,12 +26,6 @@ printMenu(int mazeLoaded)
     printf("\n");
 }
 
-/**
- *  Displays the result of the simulator.
- *  @param res The result of the maze simulator
- *  @pre The result already exists
- */
-/* For post-simulation display */
 void
 showMetrics(SearchResult *res) {
     printf("\n--- SEARCH METRICS ---\n");
@@ -51,11 +40,6 @@ showMetrics(SearchResult *res) {
     printf("Execution time       : %.3f ms\n", res->elapsedMs);
 }
 
-/**
- *  Showcases the simulation.
- *  @param m The maze being utilized
- *  @pre The maze already exists
- */
 void
 startSimulation(Maze *m)
 {
@@ -80,7 +64,7 @@ startSimulation(Maze *m)
     else
     {
         Point none;
-        
+
         printf("BFS finished exploring, but no path exists... :((( \n\n");
         none.row = -1;
         none.col = -1;
@@ -91,11 +75,6 @@ startSimulation(Maze *m)
     showMetrics(&res);
 }
 
-/**
- *  Finds the filename for the maze.
- *  @param buffer Where the maze filename will be stored
- *  @param size -
- */
 void
 promptForFilename(char *buffer, int size) {
     printf("Enter maze filename: ");
@@ -103,64 +82,89 @@ promptForFilename(char *buffer, int size) {
     getchar();
 }
 
-/**
- *  [insert desc]
- *  @param m ---
- *  @return 1 if , 0 if otherwise
- */
-int 
-runMenuLoop() {
+int
+runMenuLoop()
+{
     Maze m;
     int running;
     int exitStatus;
     int choice;
-    char name;
-    int size;
+    char filenameBuf[256];
 
     m.loaded = 0;
     running = 1;
     exitStatus = 0;
-    
-    //continue
 
-    if(m.loaded == 1)
+    while (running)
     {
+        clearScreen();
+
+        if (m.loaded)
+        {
+            printf("Current maze loaded (%d x %d).\n", m.rows, m.cols);
+        }
+
         separator1();
         printMenu(m.loaded);
         separator1();
 
         printf(">> ");
-    	scanf("%d", &choice);
+        scanf("%d", &choice);
 
-        while(choice != 1 && choice != 2 && choice != 3)
-	    {
-		    printf("Invalid input! Press Enter to try again... \n");
-    		while(getchar() != '\n');
-            getchar();
-            choice = 0; 
-        
+        while (choice != 1 && choice != 2 && choice != 3)
+        {
+            printf("Invalid input! Press Enter to try again... \n");
+            while (getchar() != '\n');
+
             separator1();
             printf(">> ");
-		    scanf("%d", &choice);
-	    }
+            scanf("%d", &choice);
+        }
 
-        if(choice == 1)
-    	{
-            promptForFilename(&name, size);
-			startSimulation(&m);
-            
-	    }
-    	else if(choice == 2)
-		{
-            loadMaze(&name, &m);
-	    }
-    	else if(choice == 3)
+        switch (choice)
         {
-		    printf("\n");
-		    printf("Leaving the simulator. Thank you!!!");
-	    }
+            case 1:
+                if (m.loaded) 
+				{
+                    startSimulation(&m);
+                } 
+				else 
+				{
+                    printf("\nNo maze loaded yet. Please load one first.\n");
+                }
+				
+                printf("\nPress Enter to continue...");
+                getchar();
+                getchar();
+                break;
 
+            case 2:
+                clearScreen();
+                printBanner();
+                printf("\n");
+				
+                promptForFilename(filenameBuf, sizeof(filenameBuf));
+				
+                if (loadMaze(filenameBuf, &m)) 
+				{
+                    printf("\nMaze loaded successfully!\n");
+                } 
+				else 
+				{
+                    printf("\nFailed to load maze! Check the filename, dimensions ");
+                    printf("(%d-%d), and that thee \"S\" and \"G\" are presenk.\n", MIN_DIM, MAX_DIM);
+                }
+				
+                printf("\nPress Enter to continue...");
+                getchar();
+                break;
+
+            case 3:
+                printf("\nGoodbye!\n");
+                running = 0;
+                break;
+        }
     }
 
-
- }
+    return exitStatus;
+}
