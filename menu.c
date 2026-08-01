@@ -50,7 +50,7 @@ int main()
 		}
 		else if(opt == 3)
 		{
-			printf("test 3");
+			printf("Leaving simulator. Thank you!");
 		}
 		
 	
