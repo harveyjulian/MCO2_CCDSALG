@@ -3,6 +3,14 @@ include <stdio.h>
 #include "maze.h"
 
 /* ---------------- Maze loading ---------------- */
+
+/**
+ *  [insert desc]
+ *  @param filename -
+ *  @param m -
+ *  @return ok -
+ *  @pre -
+ */
 int 
 loadMaze(const char *filename, Maze *m) {
     FILE *fp;
@@ -90,6 +98,14 @@ loadMaze(const char *filename, Maze *m) {
     return ok;
 }
 
+/**
+ *  [insert desc]
+ *  @param m -
+ *  @param r -
+ *  @param c -
+ *  @return in -
+ *  @pre -
+ */
 int 
 isInBounds(Maze *m, int r, int c)
 {
@@ -106,6 +122,14 @@ isInBounds(Maze *m, int r, int c)
     return in;
 }
 
+/**
+ *  [insert desc]
+ *  @param m -
+ *  @param r -
+ *  @param c -
+ *  @return walkable -
+ *  @pre -
+ */
 int 
 isWalkable(Maze *m, int r, int c)
 {
