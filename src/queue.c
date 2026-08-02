@@ -22,7 +22,7 @@ queueInit(Queue *q)
  *  @pre The queue already exists 
  */
 int 
-queueIsEmptyQueue (Queue *q) 
+queueIsEmpty(Queue *q) 
 {
     int empty;
 
