@@ -9,12 +9,20 @@
 
 /* ---------------- UI / Menu ---------------- */
 
+/**
+ *  Prints separator.
+ */
 void
 separator1()
 {
     printf("*************************************** \n");
 }
 
+/**
+ *  Prints the menu section.
+ *  @param mazdeLoaded Detemines whether the maze is already loaded
+ *  @pre The maze already exists
+ */
 void
 printMenu(int mazeLoaded)
 {
@@ -24,6 +32,9 @@ printMenu(int mazeLoaded)
     printf("\n");
 }
 
+/**
+ *  Prints the name of the simulator, which is RAT SIMULATOR.
+ */
 void
 printBanner(void)
 {
@@ -32,6 +43,11 @@ printBanner(void)
     separator1();
 }
 
+/**
+ *  Displays the details of the details of the path result from the maze.
+ *  @param res The result of the BFS algorithm in the maze
+ *  @pre The maze already exists and the BFS already executed
+ */
 void
 showMetrics(SearchResult *res) {
     printf("\n--- SEARCH METRICS ---\n");
@@ -46,6 +62,11 @@ showMetrics(SearchResult *res) {
     printf("Execution time       : %.3f ms\n", res->elapsedMs);
 }
 
+/**
+ *  Starts simulating the maze and goes through the BFS algorithm.
+ *  @param m The maze being utilized.
+ *  @pre The maze already exists
+ */
 void
 startSimulation(Maze *m)
 {
@@ -81,6 +102,12 @@ startSimulation(Maze *m)
     showMetrics(&res);
 }
 
+/**
+ *  Searches the maze file.
+ *  @param buffer Where the file's name will be put
+ *  @param size The length of the file's name
+ *  @pre The file already exists
+ */
 void
 promptForFilename(char *buffer, int size) {
     printf("Enter maze filename: ");
@@ -88,6 +115,11 @@ promptForFilename(char *buffer, int size) {
     getchar();
 }
 
+/**
+ *  Runs the simulator starting from the menu.
+ *  @return 1 when the program ended, 0 if otherwise
+ *  @pre The maze already exists and the BFS already executed
+ */
 int
 runMenuLoop()
 {
