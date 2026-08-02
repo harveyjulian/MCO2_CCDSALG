@@ -27,6 +27,14 @@ printMenu(int mazeLoaded)
 }
 
 void
+printBanner(void)
+{
+    separator1();
+    printf("RAT SIMULATOR\n");
+    separator1();
+}
+
+void
 showMetrics(SearchResult *res) {
     printf("\n--- SEARCH METRICS ---\n");
 
@@ -98,7 +106,8 @@ runMenuLoop()
     while (running)
     {
         clearScreen();
-
+		printBanner();
+		
         if (m.loaded)
         {
             printf("Current maze loaded (%d x %d).\n", m.rows, m.cols);
