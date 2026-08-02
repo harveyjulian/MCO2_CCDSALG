@@ -18,8 +18,6 @@ separator1()
 void
 printMenu(int mazeLoaded)
 {
-    printf("RAT SIMULATOR \n");
-    printf("\n");
     printf("[1] Start Simulator \n");
     printf("[2] Load File \n");
     printf("[3] Quit \n");
